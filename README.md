@@ -163,6 +163,18 @@ docker exec -it nome-do-projeto_phpmyadmin bash
 docker exec -it nome-do-projeto_redis bash
 ````
 
+### Variáveis de ambiente no arquivo .env
+
+- Baixe a biblioteca vlucas/phpdotenv:
+````bash
+composer require vlucas/phpdotenv
+````
+- Crie o arquivo .env na raiz do projeto e adicione as variáveis de ambiente:
+````bash
+
+
+
+
 
 
 
