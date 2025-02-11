@@ -2,13 +2,13 @@
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 use Dotenv\Dotenv;
-use RickTorelli\Database\Connection as Database;
+use RickTorelli\Database\Connection;
 
 $dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
 $dotenv->load();
 $dotenv->required(['DB_HOST', 'DB_NAME', 'DB_USER', 'DB_PASSWORD']);
 
-$db = new Database();
+$db = new Connection();
 $pdo = $db->getConnection();
 ?>
 <!DOCTYPE html>

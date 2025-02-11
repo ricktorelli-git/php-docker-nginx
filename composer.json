@@ -3,11 +3,8 @@
     "description": "Docker para desenvolvimento de aplicações PHP",
     "autoload": {
         "psr-4": {
-            "RickTorelli\\": "app/",
-            "RickTorelli\\Database\\": "app/database/"
-        },
-        "files": [
-        ]
+            "RickTorelli\\": "app/"
+        }
     },
     "authors": [
         {
