@@ -109,27 +109,16 @@ services:
   redis:
     container_name: nome-do-projeto_redis
 ```
-- Altere o arquivo de inicialização do banco de dados mysql `docker/init.sql` substituindo "meu_banco_de_dados" pelo nome
-  do seu banco de dados e "user" e "password" pelo usuário e senha do seu banco de dados, caso deseje:
-```bash
-CREATE DATABASE IF NOT EXISTS meu_banco_de_dados CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
-CREATE USER IF NOT EXISTS 'user'@'%' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON meu_banco_de_dados.* TO 'user'@'%';
-FLUSH PRIVILEGES;
-```
-- Altere as configurações do banco de dados na aplicação dentro de `app/config/database/connection.php` substituindo
-  "meu_banco_de_dados", "user" e "password" pelo nome do seu banco de dados, usuário e senha:
+- Copiar o arquivo `docker/.env.example` para `docker/.env` e alterar as variáveis de ambiente:
 ```bash
-const DB_HOST = 'mysql'; # Nome do serviço do banco de dados no Docker, arquivo docker-compose.yml
-const DB_NAME = 'meu_banco_de_dados'; # Usar o nome que está no arquivo init.sql em DATABASE, no diretório docker/mysql
-const DB_USER = 'user'; # Usar o nome que está no arquivo init.sql em USER, no diretório docker/mysql
-const DB_PASSWORD = 'password';  # Usar a senha que está no arquivo init.sql em PASSWORD, no diretório docker/mysql
-
-$pdo = new PDO(
-    'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME,
-    DB_USER,
-    DB_PASSWORD);
+APP_NAME='Home do Projeto PHP'
+APP_DESCRIPTION='Projeto PHP com Docker'
+APP_AUTHOR='Seu Nome Completo
+DB_HOST='mysql'
+DB_NAME='meu_banco_de_dados'
+DB_USER='seu_usuario'
+DB_PASSWORD='sua_senha'
 ```
 
 ### Executando o projeto
@@ -175,7 +164,75 @@ docker exec -it nome-do-projeto_redis bash
 composer require vlucas/phpdotenv
 ````
 - Crie o arquivo .env na raiz do projeto e adicione as variáveis de ambiente:
-````bash
+
+- Exemplo de arquivo .env:
+```bash
+APP_NAME='Home do Projeto PHP'
+APP_DESCRIPTION='Projeto PHP com Docker'
+APP_AUTHOR='Seu Nome Completo'
+
+DB_HOST='mysql' # Nome do serviço do banco de dados no Docker, arquivo docker-compose.yml
+DB_NAME='meu_banco_de_dados' # Usar o nome que está no arquivo init.sql em DATABASE, no diretório docker/mysql
+DB_USER='user' # Usar o nome que está no arquivo init.sql em USER, no diretório docker/mysql
+DB_PASSWORD='password' #  Usar a senha que está no arquivo init.sql em PASSWORD, no diretório docker/mysql
+```
+- Criar o arquivo .env.example com as mesmas variáveis de ambiente, porém sem os valores:
+```bash
+APP_NAME=''
+APP_DESCRIPTION=''
+APP_AUTHOR=''
+DB_HOST=''
+DB_NAME=''
+DB_USER=''
+DB_PASSWORD=''
+```
+- Criar na raiz o arquivo `.gitignore` e adicionar os arquivos que não devem ser versionados:
+```bash
+/vendor
+/.idea
+/docker/mysql/data/*
+/docker/redis/data/*
+.DS_Store
+.env
+```
+- Alterar a classe Connection.php em app/config/database/Connection.php para utilizar as variáveis de ambiente:
+```bash
+<?php
+
+namespace RickTorelli\Database;
+
+use PDO;
+use PDOException;
+
+class Connection
+{
+    private $pdo;
+
+    public function __construct()
+    {
+        $host = $_ENV['DB_HOST'];
+        $dbname = $_ENV['DB_NAME'];
+        $user = $_ENV['DB_USER'];
+        $password = $_ENV['DB_PASSWORD'];
+
+        try {
+            $this->pdo = new PDO("mysql:host=$host;dbname=$dbname", $user, $password);
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            die("Connection failed: " . $e->getMessage());
+        }
+    }
+
+    public function getConnection()
+    {
+        return $this->pdo;
+    }
+}
+```
+
+
+
+
 
 
 
