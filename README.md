@@ -27,14 +27,15 @@ layout.
 ├── app
 │   ├── config
 │   │   └── database
-│   │       └── connection.php
-│   │   └── constants-app.php
+│   │       └── Connection.php
+│   ├── database
+│   │   └── Database.php
 │   ├── public
 │   │   ├── assets
 │   │   │   ├── css
 │   │   │   │   └── bootstrap.css
 │   │   │   ├── js
-│   │   │   │   └── bootstrap.js
+│   │   │       └── bootstrap.js
 │   │   └── index.php
 ├── docker
 │   ├── mysql
@@ -50,7 +51,11 @@ layout.
 │   │   └── Dockerfile
 │   └── redis
 │       └── Dockerfile
+├── .env
+├── .env.example
 ├── .gitignore
+├── composer.json
+├── composer.lock
 ├── docker-compose.yml
 └── README.md
 ```
