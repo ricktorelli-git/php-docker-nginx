@@ -4,7 +4,6 @@ networks:
     driver: bridge
 
 services:
-
   php_fpm:
     container_name: nome-do-projeto-php-fpm
     build:

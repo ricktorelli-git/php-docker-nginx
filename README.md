@@ -139,23 +139,23 @@ docker-compose down --volumes
 ````
 - Para acessar o container php_fpm:
 ````bash
-docker exec -it nome-do-projeto_php_fpm bash
+docker exec -it nome-do-projeto-php-fpm bash
 ````
 - Para acessar o container nginx:
 ````bash
-docker exec -it nome-do-projeto_nginx bash
+docker exec -it nome-do-projeto-nginx bash
 ````
 - Para acessar o container mysql:
 ````bash
-docker exec -it nome-do-projeto_mysql bash
+docker exec -it nome-do-projeto-mysql bash
 ````
 - Para acessar o container phpmyadmin:
 ````bash
-docker exec -it nome-do-projeto_phpmyadmin bash
+docker exec -it nome-do-projeto-phpmyadmin bash
 ````
 - Para acessar o container redis:
 ````bash
-docker exec -it nome-do-projeto_redis bash
+docker exec -it nome-do-projeto-redis bash
 ````
 - Criar o arquivo .env.example com as mesmas variáveis de ambiente, porém sem os valores:
 ```bash
