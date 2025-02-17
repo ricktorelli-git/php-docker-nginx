@@ -69,7 +69,6 @@ git clone
 ```
 
 - Initialize o repositório git (caso utilize git):
-
 ```bash
 git init
 ```
@@ -110,15 +109,17 @@ services:
     container_name: nome-do-projeto_redis
 ```
 
-- Copiar o arquivo `docker/.env.example` para `docker/.env` e alterar as variáveis de ambiente:
+- Copiar o arquivo `.env.example` para `.env` e alterar as variáveis de ambiente:
+
 ```bash
 APP_NAME='Home do Projeto PHP'
 APP_DESCRIPTION='Projeto PHP com Docker'
-APP_AUTHOR='Seu Nome Completo
-DB_HOST='mysql'
-DB_NAME='meu_banco_de_dados'
-DB_USER='seu_usuario'
-DB_PASSWORD='sua_senha'
+APP_AUTHOR='Seu Nome Completo'
+
+DB_HOST='mysql' # Nome do serviço do banco de dados no Docker, arquivo docker-compose.yml
+DB_NAME='meu_banco_de_dados' 
+DB_USER='seu_usuário' 
+DB_PASSWORD='sua_senha' 
 ```
 
 ### Executando o projeto
@@ -156,26 +157,6 @@ docker exec -it nome-do-projeto_phpmyadmin bash
 ````bash
 docker exec -it nome-do-projeto_redis bash
 ````
-
-### Variáveis de ambiente no arquivo .env
-
-- Baixe a biblioteca vlucas/phpdotenv:
-````bash
-composer require vlucas/phpdotenv
-````
-- Crie o arquivo .env na raiz do projeto e adicione as variáveis de ambiente:
-
-- Exemplo de arquivo .env:
-```bash
-APP_NAME='Home do Projeto PHP'
-APP_DESCRIPTION='Projeto PHP com Docker'
-APP_AUTHOR='Seu Nome Completo'
-
-DB_HOST='mysql' # Nome do serviço do banco de dados no Docker, arquivo docker-compose.yml
-DB_NAME='meu_banco_de_dados' # Usar o nome que está no arquivo init.sql em DATABASE, no diretório docker/mysql
-DB_USER='user' # Usar o nome que está no arquivo init.sql em USER, no diretório docker/mysql
-DB_PASSWORD='password' #  Usar a senha que está no arquivo init.sql em PASSWORD, no diretório docker/mysql
-```
 - Criar o arquivo .env.example com as mesmas variáveis de ambiente, porém sem os valores:
 ```bash
 APP_NAME=''
