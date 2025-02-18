@@ -14,6 +14,7 @@ RUN docker-php-ext-install pdo pdo_mysql
 RUN pecl install xdebug && docker-php-ext-enable xdebug
 
 # Copie o arquivo php.ini para o contêiner
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY php.ini /usr/local/etc/php/
 
 WORKDIR /var/www/html

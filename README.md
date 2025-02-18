@@ -11,6 +11,7 @@ layout.
 - git
 - composer
 - bootstrap 5
+- make (cmake)
 
 ### Os containers Docker pré-definidos são:
 
@@ -89,7 +90,9 @@ git init
 - Instale as dependências do projeto:
 
 ```bash
+docker exec -it nome-do-projeto-php-fpm bash
 composer install
+exit
 ```
 
 - Altere o arquivo `docker-compose.yml` substituindo "nome-do-projeto" pelo nome do seu projeto:
